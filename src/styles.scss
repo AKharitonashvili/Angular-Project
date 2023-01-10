@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+$gray-1: #707070;
+$gray-2: #707070cc;
+$gray-3: #70707005;
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  color: $gray-2;
 }
 
 .flex {
@@ -28,22 +33,21 @@
   justify-content: flex-start;
 }
 
-.flex-between{
-    justify-content: space-between;
+.flex-between {
+  justify-content: space-between;
 }
 
-.flex-align-end{
-    align-items: flex-end;
+.flex-align-end {
+  align-items: flex-end;
 }
 
-.flex-align-start{
-    align-items: flex-start;
+.flex-align-start {
+  align-items: flex-start;
 }
 
-.flex-align-center{
-    align-items: center;
+.flex-align-center {
+  align-items: center;
 }
-
 
 .w100 {
   width: 100%;
@@ -128,16 +132,43 @@
 .container {
   padding: 10px 20px;
   margin: 5px;
-  border: 1px solid #707070;
+  border: 1px solid $gray-1;
   border-radius: 3px;
   padding: 10px;
   min-height: 50px;
   .card {
     @extend .container;
+    @extend .pointer;
     min-height: 40px;
     padding: 5px 10px;
     width: 100%;
+
+    &:hover {
+      background-color: $gray-3;
+    }
   }
+}
+
+.balance-and-time {
+  text-align: right;
+}
+
+.smalltext {
+  font-weight: 600;
+  color: $gray-2;
+}
+
+.bigtext {
+  font-weight: 500;
+  color: $gray-1;
+}
+
+.card-image {
+  border-radius: 3px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 html,
@@ -147,4 +178,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-center {
+  text-align: center;
 }

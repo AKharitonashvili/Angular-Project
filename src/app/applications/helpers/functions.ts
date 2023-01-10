@@ -1,10 +1,10 @@
 import { Account } from '../models';
-import { AccountTypes, Currencies } from './constants';
+import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
 export function generateAcccount(): Account {
   return {
     id: randomInt(),
-    name: randomString(),
+    name: randomName(),
     type: randomAccountType(),
     expirationMonth: randomDate(),
     balance: randomInt(0, 10000),
@@ -24,30 +24,23 @@ export function generateAccounts(): Account[] {
   return accounts;
 }
 
-export function randomDate(
-  start: number = 0,
-  end: number = 30,
-  startHour: number = 0,
-  endHour: number = 23
+function randomDate(
+  start: Date = new Date(1998, 0, 1),
+  end: Date = new Date()
 ): Date {
-  var date = new Date(+start + Math.random() * (end - start));
-  var hour = (startHour + Math.random() * (endHour - startHour)) | 0;
-  date.setHours(hour);
-  return date;
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
 }
 
 export function randomInt(min: number = 0, max: number = 100): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function randomString(length: number = 10): string {
-  var text = '';
-  var possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
+export function randomName(): string {
+  return `${Names[Math.floor(Math.random() * Names.length)]} ${
+    SurNames[Math.floor(Math.random() * SurNames.length)]
+  }`;
 }
 
 export function randomBoolean(): boolean {

@@ -1,26 +1,30 @@
 <mat-progress-spinner *ngIf="!accounts"></mat-progress-spinner>
 <ng-container *ngIf="accounts">
-  <div class="flex" *ngFor="let acc of accounts">
+  <div class="flex smalltext" *ngFor="let acc of accounts">
     <div class="flex flex-between card">
-      <div class="flex ">
+      <div class="flex">
         <img
-          class="marright10"
+          class="card-image marright10"
           [src]="acc.image"
-          (error)="randomImageUrl(acc.image)"
+          (error)="randomImageUrl(acc)"
         />
         <div class="info flex flex-col">
-          <div >
+          <div class="bigtext">
             {{ acc.name }}
           </div>
           <div>{{ acc.type }} Card</div>
-          <div>
+          <div class="bigtext">
             {{ acc.iban }}
           </div>
         </div>
       </div>
 
-      <div class="balance flex flex-align-end">
-        <div>{{ acc.balance }}</div>
+      <div class="balance-and-time flex flex-col flex-between ">
+        <div>{{ acc.expirationMonth | date : "dd/MM/yyyy" }}</div>
+        <div class="balance">
+          {{ acc.balance }}
+          <span class="bigtext"> {{ acc.currency }}</span>
+        </div>
       </div>
     </div>
   </div>
