@@ -1,0 +1,10 @@
+<div class="flex flex-start w100" *ngIf="cards$ | async as accounts">
+  <app-account
+    class="flex flex-col container w50"
+    [accounts]="accounts.credit"
+  ></app-account>
+  <app-account
+    class="flex flex-col container w50"
+    [accounts]="accounts.debit"
+  ></app-account>
+</div>

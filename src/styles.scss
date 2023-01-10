@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-between{
+    justify-content: space-between;
+}
+
+.flex-align-end{
+    align-items: flex-end;
+}
+
+.flex-align-start{
+    align-items: flex-start;
+}
+
+.flex-align-center{
+    align-items: center;
+}
+
+
+.w100 {
+  width: 100%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w40 {
+  width: 40%;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w10 {
+  width: 10%;
+}
+
+.martop5 {
+  margin-top: 5px;
+}
+
+.martop10 {
+  margin-top: 10px;
+}
+
+.martop15 {
+  margin-top: 15px;
+}
+
+.marbot5 {
+  margin-bottom: 5px;
+}
+
+.marbot10 {
+  margin-bottom: 10px;
+}
+
+.marbot15 {
+  margin-bottom: 15px;
+}
+
+.marleft5 {
+  margin-left: 5px;
+}
+
+.marleft10 {
+  margin-left: 10px;
+}
+
+.marleft15 {
+  margin-left: 15px;
+}
+
+.marright5 {
+  margin-right: 5px;
+}
+
+.marright10 {
+  margin-right: 10px;
+}
+
+.marright15 {
+  margin-right: 15px;
+}
+
+.container {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #707070;
+  border-radius: 3px;
+  padding: 10px;
+  min-height: 50px;
+  .card {
+    @extend .container;
+    min-height: 40px;
+    padding: 5px 10px;
+    width: 100%;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
