@@ -129,13 +129,21 @@ $gray-3: #70707005;
   margin-right: 15px;
 }
 
-.container {
-  padding: 10px 20px;
+.align-center{
+  align-items: center;
+}
+
+.container-border-less {
   margin: 5px;
-  border: 1px solid $gray-1;
-  border-radius: 3px;
   padding: 10px;
   min-height: 50px;
+}
+
+.container {
+  @extend .container-border-less;
+  border: 1px solid $gray-1;
+  border-radius: 3px;
+
   .card {
     @extend .container;
     @extend .pointer;

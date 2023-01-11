@@ -1,4 +1,9 @@
-<mat-progress-spinner *ngIf="!accounts"></mat-progress-spinner>
+<div
+  *ngIf="accounts.length < 1"
+  class="flex flex-center align-center container-border-less"
+>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</div>
 <ng-container *ngIf="accounts">
   <div class="flex smalltext" *ngFor="let acc of accounts">
     <div class="flex flex-between card">
@@ -19,7 +24,7 @@
         </div>
       </div>
 
-      <div class="balance-and-time flex flex-col flex-between ">
+      <div class="balance-and-time flex flex-col flex-between">
         <div>{{ acc.expirationMonth | date : "dd/MM/yyyy" }}</div>
         <div class="balance">
           {{ acc.balance }}
