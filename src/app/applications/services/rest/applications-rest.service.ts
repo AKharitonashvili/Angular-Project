@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { delay, map, Observable, of, startWith, tap } from 'rxjs';
-import { AccountsMock } from '../../mocks/applications.mocks';
+import {
+  AccountsMock,
+  DepositAccountsMock,
+} from '../../mocks/applications.mocks';
 import { Account } from '../../models';
 
 @Injectable({
@@ -22,6 +25,28 @@ export class ApplicationsRestService {
         return {
           credit: [],
           debit: [],
+        };
+      }),
+      tap((v) => console.log(v))
+    );
+  }
+
+  public getAdditionalAccounts(): Observable<{
+    saving: Account[];
+    deposit: Account[];
+  }> {
+    return of(DepositAccountsMock).pipe(
+      delay(1000),
+      startWith([]),
+      map((accounts: Account[]) => {
+        if (accounts?.length > 0) {
+          const saving = accounts?.filter((a) => a.type === 'Saving');
+          const deposit = accounts?.filter((a) => a.type === 'Deposit');
+          return { saving, deposit };
+        }
+        return {
+          saving: [],
+          deposit: [],
         };
       }),
       tap((v) => console.log(v))

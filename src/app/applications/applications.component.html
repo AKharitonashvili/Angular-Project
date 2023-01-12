@@ -9,4 +9,14 @@
     class="flex flex-col container w50"
     [accounts]="accounts.debit"
   ></app-account>
+  <ng-container *ngIf="deposits$ | async as accounts">
+    <app-account
+      class="flex flex-col container w50"
+      [accounts]="accounts.saving"
+    ></app-account>
+    <app-account
+      class="flex flex-col container w50"
+      [accounts]="accounts.deposit"
+    ></app-account>
+  </ng-container>
 </div>
