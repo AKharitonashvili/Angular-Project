@@ -5,8 +5,13 @@ import { ApplicationsRestService } from './services/rest/applications-rest.servi
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountComponent } from './components/account/account.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AccountCardComponent } from './components/account/account-card/account-card.component';
 
-const components = [ApplicationsComponent, AccountComponent];
+const components = [
+  ApplicationsComponent,
+  AccountComponent,
+  AccountCardComponent,
+];
 const services = [ApplicationsRestService];
 
 @NgModule({

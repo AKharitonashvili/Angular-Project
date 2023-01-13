@@ -4,7 +4,7 @@ import {
   AccountsMock,
   DepositAccountsMock,
 } from '../../mocks/applications.mocks';
-import { Account } from '../../models';
+import { Account, AccountsByCategory } from '../../models';
 
 @Injectable({
   providedIn: 'root',
@@ -12,44 +12,51 @@ import { Account } from '../../models';
 export class ApplicationsRestService {
   constructor() {}
 
-  public getAccounts(): Observable<{ credit: Account[]; debit: Account[] }> {
+  public getAccounts(): Observable<AccountsByCategory[]> {
     return of(AccountsMock).pipe(
       delay(1000),
       startWith([]),
       map((accounts: Account[]) => {
         if (accounts?.length > 0) {
-          const credit = accounts?.filter((a) => a.type === 'Credit');
-          const debit = accounts?.filter((a) => a.type === 'Debit');
-          return { credit, debit };
+          // const credit = accounts?.filter((a) => a.type === 'Credit');
+          // const debit = accounts?.filter((a) => a.type === 'Debit');
+          return [
+            {
+              category: 'Credit',
+              accounts: accounts?.filter((a) => a.type === 'Credit'),
+            },
+            {
+              category: 'Debit',
+              accounts: accounts?.filter((a) => a.type === 'Debit'),
+            },
+          ];
         }
-        return {
-          credit: [],
-          debit: [],
-        };
-      }),
-      tap((v) => console.log(v))
+        return [];
+      })
     );
   }
 
-  public getAdditionalAccounts(): Observable<{
-    saving: Account[];
-    deposit: Account[];
-  }> {
+  public getAdditionalAccounts(): Observable<AccountsByCategory[]> {
     return of(DepositAccountsMock).pipe(
       delay(1000),
       startWith([]),
       map((accounts: Account[]) => {
         if (accounts?.length > 0) {
-          const saving = accounts?.filter((a) => a.type === 'Saving');
-          const deposit = accounts?.filter((a) => a.type === 'Deposit');
-          return { saving, deposit };
+          // const saving = accounts?.filter((a) => a.type === 'Saving');
+          // const deposit = accounts?.filter((a) => a.type === 'Deposit');
+          return [
+            {
+              category: 'Saving',
+              accounts: accounts?.filter((a) => a.type === 'Saving'),
+            },
+            {
+              category: 'Deposit',
+              accounts: accounts?.filter((a) => a.type === 'Deposit'),
+            },
+          ];
         }
-        return {
-          saving: [],
-          deposit: [],
-        };
-      }),
-      tap((v) => console.log(v))
+        return [];
+      })
     );
   }
 }

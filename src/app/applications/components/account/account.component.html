@@ -1,36 +1,15 @@
-<div
-  *ngIf="accounts.length < 1"
-  class="flex flex-center align-center container-border-less"
->
-  <mat-progress-bar mode="query"></mat-progress-bar>
-</div>
-<ng-container *ngIf="accounts">
-  <div class="flex smalltext" *ngFor="let acc of accounts">
-    <div class="flex flex-between card">
-      <div class="flex">
-        <img
-          class="card-image marright10"
-          [src]="acc.image"
-          (error)="randomImageUrl(acc)"
-        />
-        <div class="info flex flex-col">
-          <div class="bigtext">
-            {{ acc.name }}
-          </div>
-          <div>{{ acc.type }} Card</div>
-          <div class="bigtext">
-            {{ acc.iban }}
-          </div>
-        </div>
+<ng-container *ngIf="accountsByCategory">
+  <h4 class="d-flex justify-content-center m-0 p-2">
+    {{ accountsByCategory.category }} Account
+  </h4>
+  <ng-container *ngIf="accountsByCategory.accounts">
+    <ng-container *ngFor="let account of accountsByCategory.accounts">
+      <div class="container p-0 px-3" role="button">
+        <app-account-card
+          class="d-flex justify-content-between align-items-center"
+          [account]="account"
+        ></app-account-card>
       </div>
-
-      <div class="balance-and-time flex flex-col flex-between">
-        <div>{{ acc.expirationMonth | date : "dd/MM/yyyy" }}</div>
-        <div class="balance">
-          {{ acc.balance }}
-          <span class="bigtext"> {{ acc.currency }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+    </ng-container>
+  </ng-container>
 </ng-container>

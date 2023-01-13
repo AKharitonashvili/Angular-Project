@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { randomImageUrl } from '../../helpers';
-import { Account } from '../../models';
+import { Account, AccountsByCategory } from '../../models';
 
 @Component({
   selector: 'app-account',
@@ -14,13 +14,9 @@ import { Account } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccountComponent implements OnInit {
-  @Input() public accounts: Account[];
+  @Input() public accountsByCategory: AccountsByCategory[];
 
   constructor() {}
 
-  ngOnInit() {}
-
-  public randomImageUrl(acc: Account): void {
-    acc.image = randomImageUrl();
-  }
+  ngOnInit(): void {}
 }

@@ -8,3 +8,8 @@ export interface Account {
   iban: string;
   currency: string;
 }
+
+export interface AccountsByCategory {
+  category: string;
+  accounts: Account[];
+}
