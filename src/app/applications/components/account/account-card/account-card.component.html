@@ -19,6 +19,11 @@
 <div class="d-flex flex-column align-items-end">
   <div>{{ account.expirationDate | date : "dd/MM/yyyy" }}</div>
   <div>
+    <mat-spinner
+      *ngIf="!account.balance"
+      strokeWidth="1"
+      [diameter]="24"
+    ></mat-spinner>
     {{ account.balance }}
     <span> {{ account.currency }}</span>
   </div>

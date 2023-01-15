@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { startsWith } from 'lodash';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { cloneDeep, startsWith } from 'lodash';
 import {
   combineLatest,
+  forkJoin,
   map,
   Observable,
   startWith,
   switchMap,
   tap,
+  zip,
 } from 'rxjs';
 import { findAccountBalance, groupByAccountType } from './helpers';
 import { IbansArray } from './mocks/applications.mocks';
-import { Account, AccountsByCategory } from './models';
+import { Account, AccountsByCategory, Balance } from './models';
 import { ApplicationsRestService } from './services/rest/applications-rest.service';
 
 @Component({
@@ -22,36 +24,23 @@ export class ApplicationsComponent implements OnInit {
   public accountsByCategory$: Observable<AccountsByCategory[]>;
   public accounts: Account[];
 
-  constructor(private rest: ApplicationsRestService) {}
+  constructor(
+    private rest: ApplicationsRestService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.accountsByCategory$ = combineLatest(
-      this.rest.getAccounts(),
-      this.rest.getBalances()
+      this.rest.accounts$.pipe(startWith([])),
+      this.rest.balances$.pipe(startWith([]))
     ).pipe(
-      map(([accounts, balances]) => {
-        console.log(accounts, balances);
+      startWith([]),
+      map(([accounts, balances]: [Account[], Balance[]]) => {
+        console.log({ accounts, balances });
         return accounts?.map((account: Account) => ({
           ...account,
           ...findAccountBalance(account, balances),
         }));
-      }),
-      map((accounts: Account[]) => groupByAccountType(accounts))
-    );
-
-    this.rest.getAccounts().pipe(
-      startWith([]),
-      tap((accounts: Account[]) => (this.accounts = accounts)),
-      map((accounts: Account[]) => groupByAccountType(accounts)),
-      switchMap(() => {
-        return this.rest.getBalances().pipe(
-          map((balances) =>
-            this.accounts?.map((account: Account) => ({
-              ...account,
-              ...findAccountBalance(account, balances),
-            }))
-          )
-        );
       }),
       map((accounts: Account[]) => groupByAccountType(accounts))
     );

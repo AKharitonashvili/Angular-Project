@@ -15,16 +15,14 @@ import { Account, AccountsByCategory, Balance } from '../../models';
 export class ApplicationsRestService {
   constructor() {}
 
-  public getAccounts(): Observable<Account[]> {
-    return of(AccountsMock).pipe(
-      delay(1000),
-      map((accounts: Account[]) => {
-        return accounts;
-      })
-    );
+  public accounts$: Observable<Account[]> = this.getAccounts();
+  public balances$: Observable<Balance[]> = this.getBalances();
+
+  private getAccounts(): Observable<Account[]> {
+    return of(AccountsMock).pipe(delay(1000));
   }
 
-  public getBalances(): Observable<Balance[]> {
+  private getBalances(): Observable<Balance[]> {
     return of(BalancesMock).pipe(delay(5000));
   }
 }
