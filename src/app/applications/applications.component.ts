@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, switchMap, tap } from 'rxjs';
+import { startsWith } from 'lodash';
+import {
+  combineLatest,
+  map,
+  Observable,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { findAccountBalance, groupByAccountType } from './helpers';
+import { IbansArray } from './mocks/applications.mocks';
 import { Account, AccountsByCategory } from './models';
 import { ApplicationsRestService } from './services/rest/applications-rest.service';
 
@@ -9,26 +19,41 @@ import { ApplicationsRestService } from './services/rest/applications-rest.servi
   styleUrls: ['./applications.component.scss'],
 })
 export class ApplicationsComponent implements OnInit {
-  public cards$: Observable<any>;
-  public deposits$: Observable<any>;
-
-  public accounts$: Observable<AccountsByCategory[]>;
-  public cards: AccountsByCategory[] = [];
-  public savings: AccountsByCategory[] = [];
+  public accountsByCategory$: Observable<AccountsByCategory[]>;
+  public accounts: Account[];
 
   constructor(private rest: ApplicationsRestService) {}
 
   ngOnInit() {
-    this.accounts$ = this.rest.getAccounts().pipe(
-      switchMap((accounts: Account[]) => {
-        return combineLatest(this.rest.getCards(), this.rest.getSavings()).pipe(
-          map(([cards, savings]) => {
-            this.cards = cards;
-            this.savings = savings;
-            return [...cards, ...savings];
-          })
+    this.accountsByCategory$ = combineLatest(
+      this.rest.getAccounts(),
+      this.rest.getBalances()
+    ).pipe(
+      map(([accounts, balances]) => {
+        console.log(accounts, balances);
+        return accounts?.map((account: Account) => ({
+          ...account,
+          ...findAccountBalance(account, balances),
+        }));
+      }),
+      map((accounts: Account[]) => groupByAccountType(accounts))
+    );
+
+    this.rest.getAccounts().pipe(
+      startWith([]),
+      tap((accounts: Account[]) => (this.accounts = accounts)),
+      map((accounts: Account[]) => groupByAccountType(accounts)),
+      switchMap(() => {
+        return this.rest.getBalances().pipe(
+          map((balances) =>
+            this.accounts?.map((account: Account) => ({
+              ...account,
+              ...findAccountBalance(account, balances),
+            }))
+          )
         );
-      })
+      }),
+      map((accounts: Account[]) => groupByAccountType(accounts))
     );
   }
 }

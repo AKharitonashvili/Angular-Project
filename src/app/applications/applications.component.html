@@ -2,7 +2,7 @@
 
 <div
   class="d-flex flex-column align-items-center justify-content-center"
-  *ngIf="accounts$ | async as category"
+  *ngIf="accountsByCategory$ | async as category"
 >
   <div *ngIf="category.length < 1" class="container d-flex align-items-center">
     <mat-progress-bar mode="query"></mat-progress-bar>
@@ -15,5 +15,3 @@
     ></app-account>
   </ng-container>
 </div>
-
-

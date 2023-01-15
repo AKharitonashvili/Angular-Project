@@ -1,6 +1,7 @@
-import { generateAccounts } from '../helpers';
-import { Account } from '../models';
+import { generateAccounts, generateBalances, generateIbans } from '../helpers';
+import { Account, Balance } from '../models';
 
-export const AccountsMock: Account[] = generateAccounts(20);
-export const CardsMock: Account[] = generateAccounts(10);
-export const SavingMock: Account[] = generateAccounts(10);
+export const IbansArray: string[] = generateIbans(20);
+
+export const AccountsMock: Account[] = generateAccounts(IbansArray);
+export const BalancesMock: Balance[] = generateBalances(IbansArray);

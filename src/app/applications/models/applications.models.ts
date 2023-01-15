@@ -17,6 +17,7 @@ export interface Account extends Balance, Credit {
 export interface Balance {
   balance?: number;
   currency?: string;
+  iban?: string;
 }
 
 export interface Credit {

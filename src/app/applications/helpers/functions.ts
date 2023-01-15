@@ -1,27 +1,49 @@
-import { Account } from '../models';
+import * as _ from 'lodash';
+import { AccountsMock } from '../mocks/applications.mocks';
+import { Account, AccountsByCategory, Balance } from '../models';
 import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
-export function generateAcccount(): Account {
+export function generateAcccount(iban: string): Account {
   return {
     id: randomInt(),
+    iban: iban,
     name: randomName(),
     type: randomAccountType(),
     expirationDate: randomDate(),
-    balance: randomInt(0, 10000),
     image: randomImageUrl(),
-    iban: randomIban(),
-    currency: randomCurrency(),
   };
 }
 
-export function generateAccounts(count: number): Account[] {
+export function generateBalance(iban: string): Balance {
+  return {
+    balance: randomInt(0, 10000),
+    currency: randomCurrency(),
+    iban,
+  };
+}
+
+export function generateAccounts(ibansArray: string[]): Account[] {
   const accounts: Account[] = [];
-
-  for (let i = 0; i < count; i++) {
-    accounts.push(generateAcccount());
+  for (let i = 0; i < ibansArray.length; i++) {
+    accounts.push(generateAcccount(ibansArray[i]));
   }
-
   return accounts;
+}
+
+export function generateIbans(count: number): string[] {
+  const ibans: string[] = [];
+  for (let i = 0; i < count; i++) {
+    ibans.push(randomIban());
+  }
+  return ibans;
+}
+
+export function generateBalances(ibansArray: string[]): Balance[] {
+  const balances: Balance[] = [];
+  for (let i = 0; i < ibansArray.length; i++) {
+    balances.push(generateBalance(ibansArray[i]));
+  }
+  return balances;
 }
 
 function randomDate(
@@ -48,7 +70,8 @@ export function randomBoolean(): boolean {
 }
 
 export function randomAccountType(): string {
-  return AccountTypes[Math.floor(Math.random() * AccountTypes.length)];
+  const accountTypes = Object.keys(AccountTypes);
+  return accountTypes[Math.floor(Math.random() * accountTypes.length)];
 }
 
 export function randomImageUrl(): string {
@@ -73,4 +96,18 @@ export function randomIban(): string {
 
 export function randomCurrency(): string {
   return Currencies[Math.floor(Math.random() * Currencies.length)];
+}
+
+export function groupByAccountType(accounts: Account[]): AccountsByCategory[] {
+  const grouped = _.groupBy(accounts, 'type');
+  return Object.keys(grouped).map((type: string) => {
+    return { category: type, accounts: grouped[type] };
+  });
+}
+
+export function findAccountBalance(
+  account: Account,
+  balances: Balance[]
+): Balance {
+  return balances.find((balance) => balance.iban === account.iban);
 }
