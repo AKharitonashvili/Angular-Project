@@ -6,6 +6,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountComponent } from './components/account/account.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AccountCardComponent } from './components/account/account-card/account-card.component';
+import { SharedModule } from './shared/shared.module';
+
+const modules = [SharedModule];
 
 const components = [
   ApplicationsComponent,
@@ -15,7 +18,12 @@ const components = [
 const services = [ApplicationsRestService];
 
 @NgModule({
-  imports: [CommonModule, MatProgressSpinnerModule, MatProgressBarModule],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    ...modules,
+  ],
   exports: [...components],
   declarations: [...components],
   entryComponents: [...components],

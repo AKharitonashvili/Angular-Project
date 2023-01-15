@@ -4,8 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { randomImageUrl } from '../../helpers';
-import { Account, AccountsByCategory } from '../../models';
+import { AccountsByCategory } from '../../models';
 
 @Component({
   selector: 'app-account',

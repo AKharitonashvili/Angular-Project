@@ -4,6 +4,13 @@ export const AccountTypes = {
   DEPOSIT: 'DEPOSIT',
   SAVING: 'SAVING',
 };
+export const Pictures = {
+  DEBIT: ['02', '04', '05'],
+  CREDIT: ['01', '03', '06'],
+  DEPOSIT: [],
+  SAVING: [],
+};
+
 export const Currencies: string[] = ['GEL', 'EUR', 'USD'];
 export const Names: string[] = [
   'John',

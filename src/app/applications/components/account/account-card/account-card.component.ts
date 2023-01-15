@@ -4,7 +4,6 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { randomImageUrl } from 'src/app/applications/helpers';
 import { Account } from 'src/app/applications/models';
 
 @Component({
@@ -21,6 +20,6 @@ export class AccountCardComponent implements OnInit {
   ngOnInit() {}
 
   public randomImageUrl(acc: Account): void {
-    acc.image = randomImageUrl();
+    // acc.image = randomImageUrl();
   }
 }

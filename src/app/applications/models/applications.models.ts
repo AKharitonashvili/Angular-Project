@@ -3,13 +3,12 @@ export interface AccountsByCategory {
   accounts: Account[];
 }
 
-export interface Account extends Balance, Credit {
+export interface Account extends Balance, Credit, Image {
   id: number;
   iban: string;
   name: string;
   type: string;
   expirationDate: Date;
-  image: string;
   cards?: Account[];
   actions?: Action[];
 }
@@ -24,6 +23,11 @@ export interface Credit {
   creditLimit?: number;
   creditLimitCurrency?: string;
   creditLimitDate?: Date;
+}
+
+export interface Image {
+  image?: string;
+  iban?: string;
 }
 
 export interface Action {

@@ -1,15 +1,19 @@
 <div class="d-flex justify-content-between p-2 align-items-center">
-  <img
-    width="60"
-    height="60"
-    [src]="account.image"
-    (error)="randomImageUrl(account)"
-  />
+  <div class="image d-flex justify-content-center align-items-center">
+    <mat-spinner
+      *ngIf="!account.image"
+      strokeWidth="1"
+      [diameter]="24"
+    ></mat-spinner>
+    <ng-container *ngIf="account.image | parsePictures : account.type as src">
+      <img height="55" [src]="src" (error)="randomImageUrl(account)" />
+    </ng-container>
+  </div>
+
   <div class="m-2">
     <div>
       {{ account.name }}
     </div>
-    <div>{{ account.type }}</div>
     <div>
       {{ account.iban }}
     </div>

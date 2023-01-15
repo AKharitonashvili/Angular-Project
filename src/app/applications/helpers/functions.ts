@@ -1,6 +1,5 @@
 import * as _ from 'lodash';
-import { AccountsMock } from '../mocks/applications.mocks';
-import { Account, AccountsByCategory, Balance } from '../models';
+import { Account, AccountsByCategory, Balance, Image } from '../models';
 import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
 export function generateAcccount(iban: string): Account {
@@ -10,7 +9,6 @@ export function generateAcccount(iban: string): Account {
     name: randomName(),
     type: randomAccountType(),
     expirationDate: randomDate(),
-    image: randomImageUrl(),
   };
 }
 
@@ -74,8 +72,19 @@ export function randomAccountType(): string {
   return accountTypes[Math.floor(Math.random() * accountTypes.length)];
 }
 
-export function randomImageUrl(): string {
-  return `https://picsum.photos/id/${randomInt()}/60`;
+export function generateImages(ibansArray: string[]): Image[] {
+  const images: Image[] = [];
+  for (let i = 0; i < ibansArray.length; i++) {
+    images.push(randomImage(ibansArray[i]));
+  }
+  return images;
+}
+
+export function randomImage(iban: string): Image {
+  return {
+    image: `0${randomInt(1, 6)}`,
+    iban,
+  };
 }
 
 export function randomIban(): string {
@@ -109,5 +118,9 @@ export function findAccountBalance(
   account: Account,
   balances: Balance[]
 ): Balance {
-  return balances.find((balance) => balance.iban === account.iban);
+  return balances.find((balance: Balance) => balance.iban === account.iban);
+}
+
+export function findAccountImage(account: Account, images: Image[]): Image {
+  return images.find((image: Image) => image.iban === account.iban);
 }
