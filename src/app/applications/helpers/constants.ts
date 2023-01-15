@@ -1,5 +1,4 @@
-export const AccountTypes: string[] = ['Credit', 'Debit'];
-export const DepositAccountTypes: string[] = ['Saving', 'Deposit'];
+export const AccountTypes: string[] = ['Credit', 'Debit', 'Saving', 'Deposit'];
 export const Currencies: string[] = ['GEL', 'EUR', 'USD'];
 export const Names: string[] = [
   'John',

@@ -1,18 +1,12 @@
 import { Account } from '../models';
-import {
-  AccountTypes,
-  Currencies,
-  DepositAccountTypes,
-  Names,
-  SurNames,
-} from './constants';
+import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
-export function generateAcccount(returnDeposit: boolean = false): Account {
+export function generateAcccount(): Account {
   return {
     id: randomInt(),
     name: randomName(),
-    type: randomAccountType(returnDeposit),
-    expirationMonth: randomDate(),
+    type: randomAccountType(),
+    expirationDate: randomDate(),
     balance: randomInt(0, 10000),
     image: randomImageUrl(),
     iban: randomIban(),
@@ -20,11 +14,11 @@ export function generateAcccount(returnDeposit: boolean = false): Account {
   };
 }
 
-export function generateAccounts(returnDeposit: boolean = false): Account[] {
+export function generateAccounts(count: number): Account[] {
   const accounts: Account[] = [];
 
-  for (let i = 0; i < 10; i++) {
-    accounts.push(generateAcccount(returnDeposit));
+  for (let i = 0; i < count; i++) {
+    accounts.push(generateAcccount());
   }
 
   return accounts;
@@ -53,12 +47,8 @@ export function randomBoolean(): boolean {
   return Math.random() > 0.5;
 }
 
-export function randomAccountType(returnDeposit: boolean = false): string {
-  return returnDeposit
-    ? DepositAccountTypes[
-        Math.floor(Math.random() * DepositAccountTypes.length)
-      ]
-    : AccountTypes[Math.floor(Math.random() * AccountTypes.length)];
+export function randomAccountType(): string {
+  return AccountTypes[Math.floor(Math.random() * AccountTypes.length)];
 }
 
 export function randomImageUrl(): string {

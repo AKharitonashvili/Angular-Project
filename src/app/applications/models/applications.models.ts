@@ -1,15 +1,32 @@
-export interface Account {
-  id: number;
-  name: string;
-  type: string;
-  expirationMonth: Date;
-  balance: number;
-  image: string;
-  iban: string;
-  currency: string;
-}
-
 export interface AccountsByCategory {
   category: string;
   accounts: Account[];
+}
+
+export interface Account extends Balance, Credit {
+  id: number;
+  iban: string;
+  name: string;
+  type: string;
+  expirationDate: Date;
+  image: string;
+  cards?: Account[];
+  actions?: Action[];
+}
+
+export interface Balance {
+  balance?: number;
+  currency?: string;
+}
+
+export interface Credit {
+  creditLimit?: number;
+  creditLimitCurrency?: string;
+  creditLimitDate?: Date;
+}
+
+export interface Action {
+  renewal?: boolean;
+  transferTo?: boolean;
+  transferFrom?: boolean;
 }

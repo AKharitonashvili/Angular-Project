@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { delay, map, Observable, of, startWith, tap } from 'rxjs';
 import {
   AccountsMock,
-  DepositAccountsMock,
+  CardsMock,
+  SavingMock,
 } from '../../mocks/applications.mocks';
 import { Account, AccountsByCategory } from '../../models';
 
@@ -12,22 +13,29 @@ import { Account, AccountsByCategory } from '../../models';
 export class ApplicationsRestService {
   constructor() {}
 
-  public getAccounts(): Observable<AccountsByCategory[]> {
+  public getAccounts(): Observable<Account[]> {
     return of(AccountsMock).pipe(
+      delay(1000),
+      map((accounts: Account[]) => {
+        return accounts;
+      })
+    );
+  }
+
+  public getCards(): Observable<AccountsByCategory[]> {
+    return of(CardsMock).pipe(
       delay(1000),
       startWith([]),
       map((accounts: Account[]) => {
         if (accounts?.length > 0) {
-          // const credit = accounts?.filter((a) => a.type === 'Credit');
-          // const debit = accounts?.filter((a) => a.type === 'Debit');
           return [
             {
               category: 'Credit',
-              accounts: accounts?.filter((a) => a.type === 'Credit'),
+              accounts: accounts?.filter((a: Account) => a.type === 'Credit'),
             },
             {
               category: 'Debit',
-              accounts: accounts?.filter((a) => a.type === 'Debit'),
+              accounts: accounts?.filter((a: Account) => a.type === 'Debit'),
             },
           ];
         }
@@ -36,22 +44,20 @@ export class ApplicationsRestService {
     );
   }
 
-  public getAdditionalAccounts(): Observable<AccountsByCategory[]> {
-    return of(DepositAccountsMock).pipe(
+  public getSavings(): Observable<AccountsByCategory[]> {
+    return of(SavingMock).pipe(
       delay(1000),
       startWith([]),
       map((accounts: Account[]) => {
         if (accounts?.length > 0) {
-          // const saving = accounts?.filter((a) => a.type === 'Saving');
-          // const deposit = accounts?.filter((a) => a.type === 'Deposit');
           return [
             {
               category: 'Saving',
-              accounts: accounts?.filter((a) => a.type === 'Saving'),
+              accounts: accounts?.filter((a: Account) => a.type === 'Saving'),
             },
             {
               category: 'Deposit',
-              accounts: accounts?.filter((a) => a.type === 'Deposit'),
+              accounts: accounts?.filter((a: Account) => a.type === 'Deposit'),
             },
           ];
         }

@@ -2,7 +2,7 @@
 
 <div
   class="d-flex flex-column align-items-center justify-content-center"
-  *ngIf="cards$ | async as category"
+  *ngIf="accounts$ | async as category"
 >
   <div *ngIf="category.length < 1" class="container d-flex align-items-center">
     <mat-progress-bar mode="query"></mat-progress-bar>
@@ -14,17 +14,6 @@
       [accountsByCategory]="accountsByCategory"
     ></app-account>
   </ng-container>
-
-  <ng-container *ngIf="deposits$ | async as category">
-    <div *ngIf="category.length < 1" class="container d-flex align-items-center">
-      <mat-progress-bar mode="query"></mat-progress-bar>
-    </div>
-
-    <ng-container *ngFor="let accountsByCategory of category">
-      <app-account
-        class="container d-flex m-4 flex-column"
-        [accountsByCategory]="accountsByCategory"
-      ></app-account>
-    </ng-container>
-  </ng-container>
 </div>
+
+
