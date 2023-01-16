@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
-import { indexOf } from 'lodash';
-import { delay, map, Observable, of, startWith, tap } from 'rxjs';
-import {
-  AccountTypes,
-  generateBalances,
-  groupByAccountType,
-} from '../../helpers';
+import { delay, Observable, of } from 'rxjs';
 import {
   AccountsMock,
   BalancesMock,
   ImagesMock,
 } from '../../mocks/applications.mocks';
-import { Account, AccountsByCategory, Balance, Image } from '../../models';
+import { Account, Balance, Image } from '../../models';
 
 @Injectable({
   providedIn: 'root',

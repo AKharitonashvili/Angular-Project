@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { groupBy } from 'lodash';
 import { Account, AccountsByCategory, Balance, Image } from '../models';
 import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
@@ -108,7 +108,7 @@ export function randomCurrency(): string {
 }
 
 export function groupByAccountType(accounts: Account[]): AccountsByCategory[] {
-  const grouped = _.groupBy(accounts, 'type');
+  const grouped = groupBy(accounts, 'type');
   return Object.keys(grouped).map((type: string) => {
     return { category: type, accounts: grouped[type] };
   });
