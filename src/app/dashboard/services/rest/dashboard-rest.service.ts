@@ -3,19 +3,21 @@ import { delay, Observable, of } from 'rxjs';
 import {
   AccountsMock,
   BalancesMock,
+  ExchangeRatesMock,
   ImagesMock,
 } from '../../mocks/applications.mocks';
-import { Account, Balance, Image } from '../../models';
+import { Account, Balance, ExchangeRate, Image } from '../../models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApplicationsRestService {
+export class DashboardRestService {
   constructor() {}
 
   public accounts$: Observable<Account[]> = this.getAccounts();
   public balances$: Observable<Balance[]> = this.getBalances();
   public images$: Observable<Image[]> = this.getImages();
+  public exchangeRates$: Observable<ExchangeRate[]> = this.getExchangeRates();
 
   private getAccounts(): Observable<Account[]> {
     return of(AccountsMock).pipe(delay(1000));
@@ -27,5 +29,9 @@ export class ApplicationsRestService {
 
   private getImages(): Observable<Image[]> {
     return of(ImagesMock).pipe(delay(6000));
+  }
+
+  private getExchangeRates(): Observable<ExchangeRate[]> {
+    return of(ExchangeRatesMock).pipe(delay(5000));
   }
 }

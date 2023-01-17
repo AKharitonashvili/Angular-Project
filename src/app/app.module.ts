@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { ApplicationsModule } from './applications/applications.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './applications/shared/shared.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { SharedModule } from './dashboard/shared/shared.module';
 
 const modules = [SharedModule];
 
@@ -11,7 +11,7 @@ const modules = [SharedModule];
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    ApplicationsModule,
+    DashboardModule,
     BrowserAnimationsModule,
     ...modules,
   ],

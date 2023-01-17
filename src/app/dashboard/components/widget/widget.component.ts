@@ -7,12 +7,12 @@ import {
 import { AccountsByCategory } from '../../models';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss'],
+  selector: 'app-widget',
+  templateUrl: './widget.component.html',
+  styleUrls: ['./widget.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccountComponent implements OnInit {
+export class WidgetComponent implements OnInit {
   @Input() public accountsByCategory: AccountsByCategory[];
 
   constructor() {}

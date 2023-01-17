@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApplicationsComponent } from './applications.component';
-import { ApplicationsRestService } from './services/rest/applications-rest.service';
+import { DashboardRestService } from './services/rest/dashboard-rest.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AccountComponent } from './components/account/account.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { AccountCardComponent } from './components/account/account-card/account-card.component';
 import { SharedModule } from './shared/shared.module';
+import { DashboardComponent } from './dashboard.component';
+import { WidgetComponent } from './components/widget/widget.component';
+import { AccountCardComponent } from './components/widget/account-card/account-card.component';
 
 const modules = [SharedModule];
 
-const components = [
-  ApplicationsComponent,
-  AccountComponent,
-  AccountCardComponent,
-];
-const services = [ApplicationsRestService];
+const components = [DashboardComponent, WidgetComponent, AccountCardComponent];
+const services = [DashboardRestService];
 
 @NgModule({
   imports: [
@@ -29,4 +25,4 @@ const services = [ApplicationsRestService];
   entryComponents: [...components],
   providers: [...services],
 })
-export class ApplicationsModule {}
+export class DashboardModule {}

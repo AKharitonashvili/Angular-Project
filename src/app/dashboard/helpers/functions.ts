@@ -1,5 +1,11 @@
 import { groupBy } from 'lodash';
-import { Account, AccountsByCategory, Balance, Image } from '../models';
+import {
+  Account,
+  AccountsByCategory,
+  Balance,
+  ExchangeRate,
+  Image,
+} from '../models';
 import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
 export function generateAcccount(iban: string): Account {
@@ -116,11 +122,25 @@ export function groupByAccountType(accounts: Account[]): AccountsByCategory[] {
 
 export function findAccountBalance(
   account: Account,
-  balances: Balance[]
+  balances: Balance[],
+  rates: ExchangeRate[]
 ): Balance {
-  return balances.find((balance: Balance) => balance.iban === account.iban);
+  const balance = balances.find(
+    (balance: Balance) => balance.iban === account.iban
+  );
+  return { ...balance, balanceInGel: calculateBalanceInGel(balance, rates) };
 }
 
 export function findAccountImage(account: Account, images: Image[]): Image {
   return images.find((image: Image) => image.iban === account.iban);
+}
+
+export function calculateBalanceInGel(
+  balance: Balance,
+  rates: ExchangeRate[]
+): number {
+  return (
+    rates.find((rate: ExchangeRate) => rate.currency == balance.currency)
+      ?.rate * balance?.balance || 0
+  );
 }

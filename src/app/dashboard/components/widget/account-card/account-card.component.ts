@@ -4,10 +4,10 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Account } from 'src/app/applications/models';
+import { Account } from 'src/app/dashboard/models';
 
 @Component({
-  selector: 'app-account-card',
+  selector: 'app-widget-card',
   templateUrl: './account-card.component.html',
   styleUrls: ['./account-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
