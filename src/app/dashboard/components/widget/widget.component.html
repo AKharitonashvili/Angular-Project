@@ -1,11 +1,11 @@
 <ng-container *ngIf="accountsByCategory">
   <div class="container d-flex widget border">
-    <div class="w30 py-3 px-2 border-end d-flex flex-column">
-      <div>
+    <div class="w30 py-3 px-2 pe-4 border-end d-flex flex-column">
+      <div >
         {{ accountsByCategory.category }}
       </div>
-      <div class="d-flex justify-content-between">
-        <div >Balance:</div>
+      <div class="d-flex my-2 py-1 justify-content-between border-bottom">
+        <div>Balance:</div>
         <div>
           <mat-spinner
             *ngIf="!(accountsByCategory.accounts | totalSum)"
@@ -23,7 +23,7 @@
     </div>
     <div class="w70" *ngIf="accountsByCategory.accounts">
       <ng-container *ngFor="let account of accountsByCategory.accounts">
-        <div class="container p-3" role="button">
+        <div class="container" role="button">
           <app-widget-card
             class="d-flex justify-content-between align-items-center border-bottom"
             [account]="account"
