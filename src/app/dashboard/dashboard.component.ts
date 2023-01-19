@@ -1,3 +1,9 @@
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+
 import { Component, OnInit } from '@angular/core';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import {
@@ -24,6 +30,9 @@ export class DashboardComponent implements OnInit {
   public accounts: Account[];
 
   constructor(private rest: DashboardRestService) {}
+
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+
 
   ngOnInit() {
     this.accountsByCategory$ = combineLatest(

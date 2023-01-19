@@ -1,0 +1,10 @@
+<div *ngIf="accountsByCategory?.accounts">
+  <ng-container *ngFor="let account of accountsByCategory.accounts">
+    <div class="container" role="button">
+      <app-widget-card
+        class="d-flex justify-content-between align-items-center border-bottom"
+        [account]="account"
+      ></app-widget-card>
+    </div>
+  </ng-container>
+</div>

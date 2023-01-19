@@ -1,35 +1,18 @@
 <ng-container *ngIf="accountsByCategory">
-  <div class="container d-flex widget border">
-    <div class="w30 py-3 px-2 pe-4 border-end d-flex flex-column">
-      <div >
-        {{ accountsByCategory.category }}
-      </div>
-      <div class="d-flex my-2 py-1 justify-content-between border-bottom">
-        <div>Balance:</div>
-        <div>
-          <mat-spinner
-            *ngIf="!(accountsByCategory.accounts | totalSum)"
-            strokeWidth="1"
-            [diameter]="24"
-          ></mat-spinner>
-
-          <ng-container
-            *ngIf="accountsByCategory.accounts | totalSum as totalBalance"
-          >
-            {{ totalBalance | amount }} GEL
-          </ng-container>
-        </div>
-      </div>
-    </div>
-    <div class="w70" *ngIf="accountsByCategory.accounts">
-      <ng-container *ngFor="let account of accountsByCategory.accounts">
-        <div class="container" role="button">
-          <app-widget-card
-            class="d-flex justify-content-between align-items-center border-bottom"
-            [account]="account"
-          ></app-widget-card>
-        </div>
-      </ng-container>
-    </div>
+  <div
+    class="container d-flex widget border example-list"
+    cdkDropList
+    [cdkDropListData]="todo"
+    (cdkDropListDropped)="drop($event)"
+    cdkDrag
+  >
+    <app-widget-info
+      class="w30 border-end"
+      [accountsByCategory]="accountsByCategory"
+    ></app-widget-info>
+    <app-widget-items
+      class="w70"
+      [accountsByCategory]="accountsByCategory"
+    ></app-widget-items>
   </div>
 </ng-container>

@@ -1,0 +1,21 @@
+<div *ngIf="accountsByCategory" class="py-3 px-2 pe-4 d-flex flex-column">
+  <div>
+    {{ accountsByCategory.category }}
+  </div>
+  <div class="d-flex my-2 py-1 justify-content-between border-bottom">
+    <div>Balance:</div>
+    <div>
+      <mat-spinner
+        *ngIf="!(accountsByCategory.accounts | totalSum)"
+        strokeWidth="1"
+        [diameter]="24"
+      ></mat-spinner>
+
+      <ng-container
+        *ngIf="accountsByCategory.accounts | totalSum as totalBalance"
+      >
+        {{ totalBalance | amount }} GEL
+      </ng-container>
+    </div>
+  </div>
+</div>
