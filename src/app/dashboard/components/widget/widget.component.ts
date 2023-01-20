@@ -9,7 +9,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { AccountsByCategory } from '../../models';
+import { Account, AccountsByCategory } from '../../models';
 
 @Component({
   selector: 'app-widget',
@@ -18,27 +18,11 @@ import { AccountsByCategory } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WidgetComponent implements OnInit {
-  @Input() public accountsByCategory: AccountsByCategory[];
-  @Input() public todo: string;
+  @Input() public accountsByCategory: AccountsByCategory;
 
   constructor() {}
 
-  ngOnInit(): void {}
-
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+  ngOnInit(): void {
+    console.log(this.accountsByCategory);
   }
 }

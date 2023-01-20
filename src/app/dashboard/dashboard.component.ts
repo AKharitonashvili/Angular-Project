@@ -5,7 +5,7 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import {
   findAccountBalance,
   findAccountImage,
@@ -27,14 +27,12 @@ import { DashboardRestService } from './services/rest/dashboard-rest.service';
 })
 export class DashboardComponent implements OnInit {
   public accountsByCategory$: Observable<AccountsByCategory[]>;
+  public accountsByCategory: AccountsByCategory[];
   public accounts: Account[];
 
   constructor(private rest: DashboardRestService) {}
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.accountsByCategory$ = combineLatest(
       this.rest.accounts$.pipe(startWith([])),
       this.rest.balances$.pipe(startWith([])),
@@ -55,7 +53,20 @@ export class DashboardComponent implements OnInit {
             ...findAccountImage(account, images),
           }))
       ),
-      map((accounts: Account[]) => groupByAccountType(accounts))
+      map((accounts: Account[]) => groupByAccountType(accounts)),
+      tap(
+        (accountsByCategory) => (this.accountsByCategory = accountsByCategory)
+      )
     );
+  }
+
+  public drop(event: CdkDragDrop<AccountsByCategory[]>) {
+    if (this.accountsByCategory?.length) {
+      moveItemInArray(
+        this.accountsByCategory,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

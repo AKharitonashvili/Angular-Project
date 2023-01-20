@@ -18,4 +18,13 @@
       </ng-container>
     </div>
   </div>
+
+  <button
+    *ngIf="accountsByCategory.accounts?.length > 4"
+    type="button"
+    class="btn btn-link text-start p-0"
+    (click)="hideAndShow(accountsByCategory)"
+  >
+    Show / Hide All
+  </button>
 </div>

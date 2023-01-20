@@ -10,6 +10,7 @@ import { AccountCardComponent } from './components/widget/account-card/account-c
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WidgetItemsComponent } from './components/widget/widget-items/widget-items.component';
 import { WidgetInfoComponent } from './components/widget/widget-info/widget-info.component';
+import { WidgetService } from './components/widget/services/widget.service';
 
 const modules = [SharedModule];
 const materialModules = [
@@ -24,7 +25,7 @@ const components = [
   WidgetItemsComponent,
   WidgetInfoComponent,
 ];
-const services = [DashboardRestService];
+const services = [DashboardRestService, WidgetService];
 
 @NgModule({
   imports: [CommonModule, ...materialModules, ...modules],

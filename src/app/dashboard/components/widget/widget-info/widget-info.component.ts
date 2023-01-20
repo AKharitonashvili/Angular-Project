@@ -4,7 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { AccountsByCategory } from 'src/app/dashboard/models';
+import { Account, AccountsByCategory } from 'src/app/dashboard/models';
+import { WidgetService } from '../services/widget.service';
 
 @Component({
   selector: 'app-widget-info',
@@ -15,7 +16,11 @@ import { AccountsByCategory } from 'src/app/dashboard/models';
 export class WidgetInfoComponent implements OnInit {
   @Input() public accountsByCategory: AccountsByCategory;
 
-  constructor() {}
+  constructor(private widgetService: WidgetService) {}
 
   ngOnInit(): void {}
+
+  public hideAndShow(accountsByCategory: AccountsByCategory): void {
+    this.widgetService.showAllItems$.next(accountsByCategory);
+  }
 }
