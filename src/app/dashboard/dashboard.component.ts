@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  public drop(event: CdkDragDrop<AccountsByCategory[]>) {
+  public drop(event: CdkDragDrop<AccountsByCategory[]>): void {
     if (this.accountsByCategory?.length) {
       moveItemInArray(
         this.accountsByCategory,

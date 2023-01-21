@@ -9,7 +9,9 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { filter } from 'rxjs';
 import { Account, AccountsByCategory } from '../../models';
+import { WidgetService } from './services/widget.service';
 
 @Component({
   selector: 'app-widget',
@@ -19,10 +21,19 @@ import { Account, AccountsByCategory } from '../../models';
 })
 export class WidgetComponent implements OnInit {
   @Input() public accountsByCategory: AccountsByCategory;
+  @Input() public index: string;
+  public filteredAccountsByCategory: AccountsByCategory;
 
-  constructor() {}
+  constructor(private widgetService: WidgetService) {}
 
   ngOnInit(): void {
-    console.log(this.accountsByCategory);
+    this.filteredAccountsByCategory = {
+      ...this.accountsByCategory,
+      accounts: this.accountsByCategory.accounts?.slice(0, 4),
+    };
+
+    this.widgetService.showAllItems$
+      .pipe(filter((category: string) => category == this.index))
+      .subscribe((v) => console.log({ index: this.index, v }));
   }
 }

@@ -6,7 +6,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SharedModule } from './shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { WidgetComponent } from './components/widget/widget.component';
-import { AccountCardComponent } from './components/widget/account-card/account-card.component';
+import { WidgetAccountComponent } from './components/widget/widget-account/widget-account.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WidgetItemsComponent } from './components/widget/widget-items/widget-items.component';
 import { WidgetInfoComponent } from './components/widget/widget-info/widget-info.component';
@@ -21,7 +21,7 @@ const materialModules = [
 const components = [
   DashboardComponent,
   WidgetComponent,
-  AccountCardComponent,
+  WidgetAccountComponent,
   WidgetItemsComponent,
   WidgetInfoComponent,
 ];

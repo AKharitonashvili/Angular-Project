@@ -6,7 +6,7 @@
       [diameter]="24"
     ></mat-spinner>
     <ng-container *ngIf="account.image | parsePictures : account.type as src">
-      <img height="55" [src]="src" (error)="randomImageUrl(account)" />
+      <img height="55" [src]="src" />
     </ng-container>
   </div>
 

@@ -1,12 +1,13 @@
 <ng-container *ngIf="accountsByCategory">
-  <div class="container d-flex widget border example-list">
+  <div cdkDrag class="container d-flex widget border drop-list">
     <app-widget-info
       class="w30 border-end"
+      [index]="index"
       [accountsByCategory]="accountsByCategory"
     ></app-widget-info>
     <app-widget-items
       class="w70"
-      [accountsByCategory]="accountsByCategory"
+      [accountsByCategory]="filteredAccountsByCategory"
     ></app-widget-items>
   </div>
 </ng-container>

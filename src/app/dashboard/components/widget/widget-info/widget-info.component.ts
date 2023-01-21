@@ -15,12 +15,13 @@ import { WidgetService } from '../services/widget.service';
 })
 export class WidgetInfoComponent implements OnInit {
   @Input() public accountsByCategory: AccountsByCategory;
+  @Input() public index: string;
 
   constructor(private widgetService: WidgetService) {}
 
   ngOnInit(): void {}
 
-  public hideAndShow(accountsByCategory: AccountsByCategory): void {
-    this.widgetService.showAllItems$.next(accountsByCategory);
+  public hideAndShow(): void {
+    this.widgetService.showAllItems$.next(this.index);
   }
 }

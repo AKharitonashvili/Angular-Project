@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,4 +19,14 @@ export class WidgetItemsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  public drop(event: CdkDragDrop<AccountsByCategory[]>): void {
+    if (this.accountsByCategory.accounts?.length) {
+      moveItemInArray(
+        this.accountsByCategory.accounts,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
 }

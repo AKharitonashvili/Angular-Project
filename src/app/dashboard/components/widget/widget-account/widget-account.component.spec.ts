@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AccountCardComponent } from './account-card.component';
+import { WidgetAccountComponent } from './widget-account.component';
 
-describe('AccountCardComponent', () => {
-  let component: AccountCardComponent;
-  let fixture: ComponentFixture<AccountCardComponent>;
+describe('WidgetAccountComponent', () => {
+  let component: WidgetAccountComponent;
+  let fixture: ComponentFixture<WidgetAccountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountCardComponent ]
+      declarations: [ WidgetAccountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountCardComponent);
+    fixture = TestBed.createComponent(WidgetAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

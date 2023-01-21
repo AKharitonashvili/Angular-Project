@@ -4,7 +4,7 @@
   <div
     cdkDropList
     (cdkDropListDropped)="drop($event)"
-    class="d-flex flex-column align-items-center justify-content-center w60 example-container"
+    class="d-flex flex-column align-items-center justify-content-center w60 drop-container"
     *ngIf="accountsByCategory$ | async as accountsByCategory"
   >
     <div
@@ -15,8 +15,8 @@
     </div>
     <ng-container *ngFor="let accountsByType of accountsByCategory">
       <app-widget
-        cdkDrag
         class="container d-flex m-4 flex-column"
+        [index]="accountsByType.category"
         [accountsByCategory]="accountsByType"
       ></app-widget>
     </ng-container>
