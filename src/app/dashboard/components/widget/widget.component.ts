@@ -37,19 +37,23 @@ export class WidgetComponent implements OnInit {
       .subscribe();
   }
 
-  public hideAndShowAll(): void {
-    if (
+  private hideAndShowAll(): void {
+    this.filteredAccountsByCategory = {
+      ...this.accountsByCategory,
+      accounts: this.accounts(),
+    };
+  }
+
+  private accounts(): Account[] {
+    return this.isMoreThanFour()
+      ? this.accountsByCategory.accounts?.slice(0, 4)
+      : this.accountsByCategory.accounts;
+  }
+
+  private isMoreThanFour(): boolean {
+    return (
       !this.filteredAccountsByCategory ||
       this.filteredAccountsByCategory?.accounts?.length > 4
-    ) {
-      this.filteredAccountsByCategory = {
-        ...this.accountsByCategory,
-        accounts: this.accountsByCategory.accounts?.slice(0, 4),
-      };
-    } else {
-      this.filteredAccountsByCategory = {
-        ...this.accountsByCategory,
-      };
-    }
+    );
   }
 }
