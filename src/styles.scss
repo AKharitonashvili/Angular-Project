@@ -39,6 +39,10 @@
   width: 90%;
 }
 
+.drop-list{
+  min-height: 200px;
+}
+
 .drop-container{
   &:active{
     cursor: grab;
