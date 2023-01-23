@@ -11,4 +11,4 @@ const pipes = [TotalSumPipe, PictureByProductPipe, AmountPipe];
   declarations: [...pipes],
   exports: [...pipes],
 })
-export class SharedModule {}
+export class DashboardSharedModule {}

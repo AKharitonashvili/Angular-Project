@@ -5,6 +5,7 @@ import {
 } from '@angular/cdk/drag-drop';
 
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import {
   findAccountBalance,

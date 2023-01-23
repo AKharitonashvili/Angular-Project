@@ -39,12 +39,12 @@
   width: 90%;
 }
 
-.drop-list{
-  min-height: 200px;
+.drop-list {
+  min-height: 160px;
 }
 
-.drop-container{
-  &:active{
+.drop-container {
+  &:active {
     cursor: grab;
   }
 }
@@ -56,3 +56,5 @@
 .cdk-drag-placeholder {
   opacity: 0;
 }
+
+
