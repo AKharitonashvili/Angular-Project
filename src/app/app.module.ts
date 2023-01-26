@@ -5,8 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardSharedModule } from './dashboard/shared/shared.module';
 import { NavBarModule } from './nav-bar/nav-bar.module';
+import { StoreModule } from '@ngrx/store';
 
-const modules = [DashboardSharedModule, BrowserModule, BrowserAnimationsModule];
+const modules = [
+  DashboardSharedModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+  StoreModule.forRoot({}, {}),
+];
 
 @NgModule({
   declarations: [AppComponent],

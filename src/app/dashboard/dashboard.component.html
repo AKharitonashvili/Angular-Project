@@ -5,7 +5,7 @@
     class="d-flex flex-column align-items-center justify-content-center w60 drop-container"
     *ngIf="accountsByCategory$ | async as accountsByCategory"
   >
-    <app-progress class="w-100" [loading]="true"></app-progress>
+    <app-progress class="w-100" [loading]="!accountsByCategory.length"></app-progress>
     <ng-container *ngFor="let accountsByType of accountsByCategory">
       <app-widget
         class="container d-flex m-4 flex-column"
