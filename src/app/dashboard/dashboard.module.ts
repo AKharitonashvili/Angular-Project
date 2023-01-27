@@ -12,8 +12,9 @@ import { WidgetItemsComponent } from './components/widget/widget-items/widget-it
 import { WidgetInfoComponent } from './components/widget/widget-info/widget-info.component';
 import { WidgetService } from './components/widget/services/widget.service';
 import { SharedModule } from '../shared/shared.module';
+import { BookListModule } from '../book-list/book-list.module';
 
-const modules = [DashboardSharedModule, SharedModule];
+const modules = [DashboardSharedModule, SharedModule,BookListModule];
 const materialModules = [
   DragDropModule,
   MatProgressSpinnerModule,

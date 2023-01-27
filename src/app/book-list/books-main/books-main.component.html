@@ -1,0 +1,19 @@
+<div class="container border p-4 my-4 d-flex justify-content-between">
+  <div class="w40 border-end p-2">
+    <h2>Books</h2>
+    <app-book-list
+      class="book-list"
+      [books]="(books$ | async)!"
+      (add)="onAdd($event)"
+    ></app-book-list>
+  </div>
+
+  <div class="w40  p-2">
+    <h2>My Collection</h2>
+    <app-book-collection
+      class="book-collection"
+      [books]="(bookCollection$ | async)!"
+      (remove)="onRemove($event)"
+    ></app-book-collection>
+  </div>
+</div>
