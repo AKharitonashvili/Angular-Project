@@ -1,11 +1,7 @@
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { Component, OnInit } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
+import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import {
   findAccountBalance,
@@ -30,6 +26,7 @@ export class DashboardComponent implements OnInit {
   public accountsByCategory$: Observable<AccountsByCategory[]>;
   public accountsByCategory: AccountsByCategory[];
   public accounts: Account[];
+  public count$: Observable<number>;
 
   constructor(private rest: DashboardRestService) {}
 
@@ -59,15 +56,5 @@ export class DashboardComponent implements OnInit {
         (accountsByCategory) => (this.accountsByCategory = accountsByCategory)
       )
     );
-  }
-
-  public drop(event: CdkDragDrop<AccountsByCategory[]>): void {
-    if (this.accountsByCategory?.length) {
-      moveItemInArray(
-        this.accountsByCategory,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
   }
 }

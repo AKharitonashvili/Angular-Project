@@ -6,17 +6,23 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardSharedModule } from './dashboard/shared/shared.module';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { StoreModule } from '@ngrx/store';
+import { ProductsModule } from './products/products.module';
+import { counterReducer } from './products/store/reducers';
 
 const modules = [
+  DashboardModule,
+  NavBarModule,
+  ProductsModule,
   DashboardSharedModule,
-  BrowserModule,
-  BrowserAnimationsModule,
-  StoreModule.forRoot({}, {}),
 ];
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [DashboardModule, NavBarModule, ...modules],
+  imports: [
+    ...modules,
+    BrowserModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
