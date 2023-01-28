@@ -1,8 +1,7 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
+import { LoadAccounts, selectAccountsData } from '../products/store';
 import {
   findAccountBalance,
   findAccountImage,
@@ -28,16 +27,19 @@ export class DashboardComponent implements OnInit {
   public accounts: Account[];
   public count$: Observable<number>;
 
-  constructor(private rest: DashboardRestService) {}
+  constructor(private rest: DashboardRestService, private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(LoadAccounts());
+
     this.accountsByCategory$ = combineLatest(
-      this.rest.accounts$.pipe(startWith([])),
+      this.store.select(selectAccountsData),
       this.rest.balances$.pipe(startWith([])),
       this.rest.images$.pipe(startWith([])),
       this.rest.exchangeRates$.pipe(startWith([]))
     ).pipe(
       startWith([]),
+      tap((v) => console.log(v)),
       map(
         ([accounts, balances, images, exchangeRates]: [
           Account[],

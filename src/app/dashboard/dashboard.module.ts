@@ -14,11 +14,14 @@ import { WidgetService } from './components/widget/services/widget.service';
 import { SharedModule } from '../shared/shared.module';
 import { BookListModule } from '../book-list/book-list.module';
 
-const modules = [DashboardSharedModule, SharedModule,BookListModule];
-const materialModules = [
+const modules = [
+  CommonModule,
   DragDropModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  DashboardSharedModule,
+  SharedModule,
+  BookListModule,
 ];
 const components = [
   DashboardComponent,
@@ -30,7 +33,7 @@ const components = [
 const services = [DashboardRestService, WidgetService];
 
 @NgModule({
-  imports: [CommonModule, ...materialModules, ...modules],
+  imports: [...modules],
   exports: [...components],
   declarations: [...components],
   entryComponents: [...components],

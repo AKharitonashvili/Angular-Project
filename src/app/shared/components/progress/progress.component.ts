@@ -14,12 +14,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ProgressComponent implements OnInit {
-
   @Input() loading: boolean;
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.loading);
-  }
+  ngOnInit() {}
 }

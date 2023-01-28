@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './store/reducers/product.reducer';
+import { ProductsComponent } from './products.component';
+import { ProductsService } from './services/products.service';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [],
+  declarations: [ProductsComponent],
+  providers: [ProductsService],
 })
 export class ProductsModule {}
