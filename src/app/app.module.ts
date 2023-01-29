@@ -8,7 +8,11 @@ import { NavBarModule } from './nav-bar/nav-bar.module';
 import { BookListModule } from './book-list/book-list.module';
 import { ProductsModule } from './products/products.module';
 import { StoreModule } from '@ngrx/store';
-import { AccountDataReducer, ProductDataEffects } from './products/store';
+import {
+  AccountBalancesDataReducer,
+  AccountDataReducer,
+  ProductDataEffects,
+} from './products/store';
 import { EffectsModule } from '@ngrx/effects';
 
 const modules = [
@@ -19,7 +23,10 @@ const modules = [
   DashboardSharedModule,
   BookListModule,
   ProductsModule,
-  StoreModule.forRoot({ accounts: AccountDataReducer }),
+  StoreModule.forRoot({
+    accounts: AccountDataReducer,
+    accountBalances: AccountBalancesDataReducer,
+  }),
   EffectsModule.forRoot([ProductDataEffects]),
 ];
 

@@ -6,3 +6,10 @@ export const selectAccountsData = createSelector(
   selectAccountsState,
   (state: ProductState) => state.data
 );
+
+export const selectAccountsBalancesState = (state: AppState) =>
+  state.accountBalances;
+export const selectAccountsBalancesData = createSelector(
+  selectAccountsBalancesState,
+  (state: ProductState) => state.data
+);

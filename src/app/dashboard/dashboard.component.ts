@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
-import { LoadAccounts, selectAccountsData } from '../products/store';
+import {
+  LoadAccountBalances,
+  LoadAccounts,
+  selectAccountsBalancesData,
+  selectAccountsData,
+} from '../products/store';
 import {
   findAccountBalance,
   findAccountImage,
@@ -31,10 +36,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(LoadAccounts());
+    this.store.dispatch(LoadAccountBalances())
 
     this.accountsByCategory$ = combineLatest(
       this.store.select(selectAccountsData),
-      this.rest.balances$.pipe(startWith([])),
+      this.store.select(selectAccountsBalancesData),
       this.rest.images$.pipe(startWith([])),
       this.rest.exchangeRates$.pipe(startWith([]))
     ).pipe(
