@@ -1,7 +1,8 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ProductState } from '../models/product-store.models';
+import { createSelector } from '@ngrx/store';
+import { AppState, ProductState } from '../models/product-store.models';
 
-export const selectData = (state: ProductState) => state.data;
-export const selectAccountsData = createSelector(selectData, (data) => {
-  return data || [];
-});
+export const selectAccountsState = (state: AppState) => state.accounts;
+export const selectAccountsData = createSelector(
+  selectAccountsState,
+  (state: ProductState) => state.data
+);

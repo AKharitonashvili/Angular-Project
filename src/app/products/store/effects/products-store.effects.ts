@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect } from '@ngrx/effects';
-import { ofType } from '@ngrx/effects/src';
+import { ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ProductsService } from '../../services/products.service';
 import {
@@ -11,21 +11,20 @@ import {
 
 @Injectable()
 export class ProductDataEffects {
-  public loadAccounts$ = createEffect(() =>
+  constructor(
+    private actions$: Actions,
+    private productsService: ProductsService
+  ) {}
+
+  loadAccounts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LoadAccounts),
       switchMap(() =>
         this.productsService.accounts$.pipe(
-          tap((v) => console.log(v)),
           map((data) => LoadAccountsSuccess({ data })),
           catchError((error) => of(LoadAccountsFailure({ error })))
         )
       )
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private productsService: ProductsService
-  ) {}
 }

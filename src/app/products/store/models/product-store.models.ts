@@ -10,3 +10,10 @@ export interface ProductState {
   loading: boolean;
   error: any;
 }
+
+export interface AppState {
+  accounts: ProductState;
+  accountImages: ProductState;
+  accountBalances: ProductState;
+  excangeRates: ProductState;
+}

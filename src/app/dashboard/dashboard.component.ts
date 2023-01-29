@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit {
       this.rest.exchangeRates$.pipe(startWith([]))
     ).pipe(
       startWith([]),
-      tap((v) => console.log(v)),
       map(
         ([accounts, balances, images, exchangeRates]: [
           Account[],
