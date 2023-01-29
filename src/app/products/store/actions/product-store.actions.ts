@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Account, Balance } from 'src/app/dashboard/models';
+import { Account, Balance, AccountImages } from 'src/app/dashboard/models';
 
 export const LoadAccounts = createAction('[Account] Load Data');
 export const LoadAccountsSuccess = createAction(
@@ -18,5 +18,15 @@ export const LoadAccountBalancesSuccess = createAction(
 );
 export const LoadAccountBalancesFailure = createAction(
   '[Balances] Load Data Failure',
+  props<{ error: any }>()
+);
+
+export const loadAccountImages = createAction('[Images] Load data');
+export const LoadAccountImagesSuccess = createAction(
+  '[Images] Load Data Success',
+  props<{ data: AccountImages[] }>()
+);
+export const LoadAccountImagesFailure = createAction(
+  '[Images] Load Data Failure',
   props<{ error: any }>()
 );

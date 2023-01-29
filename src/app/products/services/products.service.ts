@@ -10,7 +10,7 @@ import {
   Account,
   Balance,
   ExchangeRate,
-  Image,
+  AccountImages,
 } from 'src/app/dashboard/models';
 
 @Injectable({
@@ -19,7 +19,7 @@ import {
 export class ProductsService {
   public accounts$: Observable<Account[]> = this.getAccounts();
   public balances$: Observable<Balance[]> = this.getBalances();
-  public images$: Observable<Image[]> = this.getImages();
+  public images$: Observable<AccountImages[]> = this.getImages();
   public exchangeRates$: Observable<ExchangeRate[]> = this.getExchangeRates();
 
   constructor() {}
@@ -32,7 +32,7 @@ export class ProductsService {
     return of(BalancesMock).pipe(delay(5000));
   }
 
-  private getImages(): Observable<Image[]> {
+  private getImages(): Observable<AccountImages[]> {
     return of(ImagesMock).pipe(delay(6000));
   }
 

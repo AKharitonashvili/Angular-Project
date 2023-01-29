@@ -4,7 +4,7 @@ import {
   AccountsByCategory,
   Balance,
   ExchangeRate,
-  Image,
+  AccountImages,
 } from '../models';
 import { AccountTypes, Currencies, Names, SurNames } from './constants';
 
@@ -78,15 +78,15 @@ export function randomAccountType(): string {
   return accountTypes[Math.floor(Math.random() * accountTypes.length)];
 }
 
-export function generateImages(ibansArray: string[]): Image[] {
-  const images: Image[] = [];
+export function generateImages(ibansArray: string[]): AccountImages[] {
+  const images: AccountImages[] = [];
   for (let i = 0; i < ibansArray.length; i++) {
     images.push(randomImage(ibansArray[i]));
   }
   return images;
 }
 
-export function randomImage(iban: string): Image {
+export function randomImage(iban: string): AccountImages {
   return {
     image: `0${randomInt(1, 6)}`,
     iban,
@@ -131,8 +131,8 @@ export function findAccountBalance(
   return { ...balance, balanceInGel: calculateBalanceInGel(balance, rates) };
 }
 
-export function findAccountImage(account: Account, images: Image[]): Image {
-  return images.find((image: Image) => image.iban === account.iban);
+export function findAccountImage(account: Account, images: AccountImages[]): AccountImages {
+  return images.find((image: AccountImages) => image.iban === account.iban);
 }
 
 export function calculateBalanceInGel(

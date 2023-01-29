@@ -2,11 +2,11 @@ import {
   Account,
   Balance,
   ExchangeRate,
-  Image,
+  AccountImages,
 } from 'src/app/dashboard/models';
 
 export interface ProductState {
-  data: Account[] | Balance[] | Image[] | ExchangeRate[];
+  data: Account[] | Balance[] | AccountImages[] | ExchangeRate[];
   loading: boolean;
   error: any;
 }

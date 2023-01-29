@@ -13,3 +13,10 @@ export const selectAccountsBalancesData = createSelector(
   selectAccountsBalancesState,
   (state: ProductState) => state.data
 );
+
+export const selectAccountImagesState = (state: AppState) =>
+  state.accountImages;
+export const selectAccountImagesData = createSelector(
+  selectAccountImagesState,
+  (state: ProductState) => state.data
+);

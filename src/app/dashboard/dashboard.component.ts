@@ -3,7 +3,9 @@ import { select, Store } from '@ngrx/store';
 import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import {
   LoadAccountBalances,
+  loadAccountImages,
   LoadAccounts,
+  selectAccountImagesData,
   selectAccountsBalancesData,
   selectAccountsData,
 } from '../products/store';
@@ -17,7 +19,7 @@ import {
   AccountsByCategory,
   Balance,
   ExchangeRate,
-  Image,
+  AccountImages,
 } from './models';
 import { DashboardRestService } from './services/rest/dashboard-rest.service';
 
@@ -36,12 +38,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(LoadAccounts());
-    this.store.dispatch(LoadAccountBalances())
+    this.store.dispatch(LoadAccountBalances());
+    this.store.dispatch(loadAccountImages())
 
     this.accountsByCategory$ = combineLatest(
       this.store.select(selectAccountsData),
       this.store.select(selectAccountsBalancesData),
-      this.rest.images$.pipe(startWith([])),
+      this.store.select(selectAccountImagesData),
       this.rest.exchangeRates$.pipe(startWith([]))
     ).pipe(
       startWith([]),
@@ -49,7 +52,7 @@ export class DashboardComponent implements OnInit {
         ([accounts, balances, images, exchangeRates]: [
           Account[],
           Balance[],
-          Image[],
+          AccountImages[],
           ExchangeRate[]
         ]) =>
           accounts?.map((account: Account) => ({

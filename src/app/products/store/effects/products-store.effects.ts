@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect } from '@ngrx/effects';
 import { ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { Account, Balance } from 'src/app/dashboard/models';
+import { Account, AccountImages, Balance } from 'src/app/dashboard/models';
 import { ProductsService } from '../../services/products.service';
 import {
   LoadAccountBalances,
   LoadAccountBalancesFailure,
   LoadAccountBalancesSuccess,
+  loadAccountImages,
+  LoadAccountImagesFailure,
+  LoadAccountImagesSuccess,
   LoadAccounts,
   LoadAccountsFailure,
   LoadAccountsSuccess,
@@ -39,6 +43,18 @@ export class ProductDataEffects {
         this.productsService.balances$.pipe(
           map((data: Balance[]) => LoadAccountBalancesSuccess({ data })),
           catchError((error) => of(LoadAccountBalancesFailure({ error })))
+        )
+      )
+    )
+  );
+
+  loadAccountImages$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadAccountImages),
+      switchMap(() =>
+        this.productsService.images$.pipe(
+          map((data: AccountImages[]) => LoadAccountImagesSuccess({ data })),
+          catchError((error) => of(LoadAccountImagesFailure({ error })))
         )
       )
     )

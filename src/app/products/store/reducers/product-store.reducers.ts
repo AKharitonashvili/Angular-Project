@@ -4,6 +4,9 @@ import {
   LoadAccountBalances,
   LoadAccountBalancesFailure,
   LoadAccountBalancesSuccess,
+  loadAccountImages,
+  LoadAccountImagesFailure,
+  LoadAccountImagesSuccess,
   LoadAccounts,
   LoadAccountsFailure,
   LoadAccountsSuccess,
@@ -43,6 +46,21 @@ export const AccountBalancesDataReducer = createReducer(
     loading: false,
   })),
   on(LoadAccountBalancesFailure, (state: ProductState, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  }))
+);
+
+export const AccountImagesDataReducer = createReducer(
+  InitialProductState,
+  on(loadAccountImages, (state: ProductState) => ({ ...state, loading: true })),
+  on(LoadAccountImagesSuccess, (state: ProductState, { data }) => ({
+    ...state,
+    data,
+    loading: false,
+  })),
+  on(LoadAccountImagesFailure, (state: ProductState, { error }) => ({
     ...state,
     error,
     loading: false,
