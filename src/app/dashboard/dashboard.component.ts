@@ -5,9 +5,11 @@ import {
   LoadAccountBalances,
   loadAccountImages,
   LoadAccounts,
+  LoadExchangeRates,
   selectAccountImagesData,
   selectAccountsBalancesData,
   selectAccountsData,
+  selectExchangeRatesData,
 } from '../products/store';
 import {
   findAccountBalance,
@@ -39,13 +41,15 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(LoadAccounts());
     this.store.dispatch(LoadAccountBalances());
-    this.store.dispatch(loadAccountImages())
+    this.store.dispatch(loadAccountImages());
+    this.store.dispatch(LoadExchangeRates());
+    this.store.pipe(tap(v=>console.log(v))).subscribe()
 
     this.accountsByCategory$ = combineLatest(
       this.store.select(selectAccountsData),
       this.store.select(selectAccountsBalancesData),
       this.store.select(selectAccountImagesData),
-      this.rest.exchangeRates$.pipe(startWith([]))
+      this.store.select(selectExchangeRatesData)
     ).pipe(
       startWith([]),
       map(

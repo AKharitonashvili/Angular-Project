@@ -15,5 +15,5 @@ export interface AppState {
   accounts: ProductState;
   accountImages: ProductState;
   accountBalances: ProductState;
-  excangeRates: ProductState;
+  exchangeRates: ProductState;
 }

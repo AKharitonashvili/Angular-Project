@@ -3,7 +3,12 @@ import { Actions, createEffect } from '@ngrx/effects';
 import { ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { Account, AccountImages, Balance } from 'src/app/dashboard/models';
+import {
+  Account,
+  AccountImages,
+  Balance,
+  ExchangeRate,
+} from 'src/app/dashboard/models';
 import { ProductsService } from '../../services/products.service';
 import {
   LoadAccountBalances,
@@ -15,6 +20,9 @@ import {
   LoadAccounts,
   LoadAccountsFailure,
   LoadAccountsSuccess,
+  LoadExchangeRates,
+  LoadExchangeRatesFailure,
+  LoadExchangeRatesSuccess,
 } from '../actions/product-store.actions';
 
 @Injectable()
@@ -55,6 +63,18 @@ export class ProductDataEffects {
         this.productsService.images$.pipe(
           map((data: AccountImages[]) => LoadAccountImagesSuccess({ data })),
           catchError((error) => of(LoadAccountImagesFailure({ error })))
+        )
+      )
+    )
+  );
+
+  loadExchangeRates$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LoadExchangeRates),
+      switchMap(() =>
+        this.productsService.exchangeRates$.pipe(
+          map((data: ExchangeRate[]) => LoadExchangeRatesSuccess({ data })),
+          catchError((error) => of(LoadExchangeRatesFailure({ error })))
         )
       )
     )

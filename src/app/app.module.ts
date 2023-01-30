@@ -12,6 +12,7 @@ import {
   AccountBalancesDataReducer,
   AccountDataReducer,
   AccountImagesDataReducer,
+  ExchangeRatesDataReducer,
   ProductDataEffects,
 } from './products/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,6 +29,7 @@ const modules = [
     accounts: AccountDataReducer,
     accountBalances: AccountBalancesDataReducer,
     accountImages: AccountImagesDataReducer,
+    exchangeRates: ExchangeRatesDataReducer,
   }),
   EffectsModule.forRoot([ProductDataEffects]),
 ];

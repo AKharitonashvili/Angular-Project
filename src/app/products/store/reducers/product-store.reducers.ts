@@ -10,6 +10,9 @@ import {
   LoadAccounts,
   LoadAccountsFailure,
   LoadAccountsSuccess,
+  LoadExchangeRates,
+  LoadExchangeRatesFailure,
+  LoadExchangeRatesSuccess,
 } from '../actions/product-store.actions';
 import { ProductState } from '../models/product-store.models';
 
@@ -61,6 +64,21 @@ export const AccountImagesDataReducer = createReducer(
     loading: false,
   })),
   on(LoadAccountImagesFailure, (state: ProductState, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  }))
+);
+
+export const ExchangeRatesDataReducer = createReducer(
+  InitialProductState,
+  on(LoadExchangeRates, (state: ProductState) => ({ ...state, loading: true })),
+  on(LoadExchangeRatesSuccess, (state: ProductState, { data }) => ({
+    ...state,
+    data,
+    loading: false,
+  })),
+  on(LoadExchangeRatesFailure, (state: ProductState, { error }) => ({
     ...state,
     error,
     loading: false,

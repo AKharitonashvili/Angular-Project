@@ -20,3 +20,10 @@ export const selectAccountImagesData = createSelector(
   selectAccountImagesState,
   (state: ProductState) => state.data
 );
+
+export const selectExchangeRatesState = (state: AppState) =>
+  state.exchangeRates;
+export const selectExchangeRatesData = createSelector(
+  selectExchangeRatesState,
+  (state: ProductState) => state.data
+);
