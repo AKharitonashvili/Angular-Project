@@ -7,15 +7,6 @@ import { DashboardSharedModule } from './dashboard/shared/shared.module';
 import { NavBarModule } from './nav-bar/nav-bar.module';
 import { BookListModule } from './book-list/book-list.module';
 import { ProductsModule } from './products/products.module';
-import { StoreModule } from '@ngrx/store';
-import {
-  AccountBalancesDataReducer,
-  AccountDataReducer,
-  AccountImagesDataReducer,
-  ExchangeRatesDataReducer,
-  ProductDataEffects,
-} from './products/store';
-import { EffectsModule } from '@ngrx/effects';
 
 const modules = [
   BrowserModule,
@@ -25,13 +16,6 @@ const modules = [
   DashboardSharedModule,
   BookListModule,
   ProductsModule,
-  StoreModule.forRoot({
-    accounts: AccountDataReducer,
-    accountBalances: AccountBalancesDataReducer,
-    accountImages: AccountImagesDataReducer,
-    exchangeRates: ExchangeRatesDataReducer,
-  }),
-  EffectsModule.forRoot([ProductDataEffects]),
 ];
 
 @NgModule({
