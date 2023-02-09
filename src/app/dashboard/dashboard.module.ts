@@ -12,7 +12,7 @@ import { WidgetItemsComponent } from './components/widget/widget-items/widget-it
 import { WidgetInfoComponent } from './components/widget/widget-info/widget-info.component';
 import { WidgetService } from './components/widget/services/widget.service';
 import { SharedModule } from '../shared/shared.module';
-import { BookListModule } from '../book-list/book-list.module';
+import { RouterModule, Routes } from '@angular/router';
 
 const modules = [
   CommonModule,
@@ -21,7 +21,6 @@ const modules = [
   MatProgressBarModule,
   DashboardSharedModule,
   SharedModule,
-  BookListModule,
 ];
 const components = [
   DashboardComponent,
@@ -32,8 +31,15 @@ const components = [
 ];
 const services = [DashboardRestService, WidgetService];
 
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardComponent,
+  },
+];
+
 @NgModule({
-  imports: [...modules],
+  imports: [...modules, RouterModule.forChild(routes)],
   exports: [...components],
   declarations: [...components],
   entryComponents: [...components],
