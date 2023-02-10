@@ -12,6 +12,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
+  {
+    path: 'Transactions',
+    loadChildren: () =>
+      import('./transactions/transactions.module').then(
+        (m) => m.TransactionsModule
+      ),
+  },
 ];
 
 @NgModule({
