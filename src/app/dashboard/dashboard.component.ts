@@ -43,7 +43,6 @@ export class DashboardComponent implements OnInit {
     this.store.dispatch(LoadAccountBalances());
     this.store.dispatch(loadAccountImages());
     this.store.dispatch(LoadExchangeRates());
-    this.store.pipe(tap(v=>console.log(v))).subscribe()
 
     this.accountsByCategory$ = combineLatest(
       this.store.select(selectAccountsData),

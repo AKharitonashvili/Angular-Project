@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { Transaction } from './models';
+import { TransactionsRestService } from './services/transactions-rest.service';
 
 @Component({
   selector: 'app-transactions',
@@ -7,7 +10,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsComponent implements OnInit {
-  constructor() {}
+  constructor(private rest: TransactionsRestService) {}
 
-  ngOnInit() {}
+  public transactions$: Observable<Transaction[]>;
+
+  ngOnInit() {
+    this.transactions$ = this.rest.transactions$.pipe(
+      tap((v) => console.log(v))
+    );
+  }
 }

@@ -6,7 +6,7 @@ import {
   ExchangeRate,
   AccountImages,
 } from '../models';
-import { AccountTypes, Currencies, Names, SurNames } from './constants';
+import { AccountTypes, Currencies, Names, SurNames } from '../constants/constants';
 
 export function generateAcccount(iban: string): Account {
   return {
@@ -50,7 +50,7 @@ export function generateBalances(ibansArray: string[]): Balance[] {
   return balances;
 }
 
-function randomDate(
+export function randomDate(
   start: Date = new Date(1998, 0, 1),
   end: Date = new Date()
 ): Date {
