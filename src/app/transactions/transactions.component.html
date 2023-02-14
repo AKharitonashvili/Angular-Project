@@ -1,1 +1,36 @@
-<p *ngIf="transactions$ | async">transactions works!</p>
+<div
+  class="d-flex flex-column w-50"
+  *ngIf="transactions$ | async as transactions"
+>
+  <div
+    class="d-flex justify-content-between p-2 px-5"
+    *ngFor="let transaction of transactions"
+  >
+    <div>
+      {{ transaction.description }}
+    </div>
+    <div
+      class="amount d-flex justify-content-end"
+      [ngClass]="{
+        'text-danger': transaction.status == 'negative',
+        'text-success': transaction.status == 'positive'
+      }"
+    >
+      <app-progress
+        class="w-100"
+        *ngIf="!transaction.currency"
+        [loading]="true"
+      ></app-progress>
+      <ng-container *ngIf="transaction.currency">
+        <span
+          *ngIf="
+            transaction.status == 'negative' || transaction.status == 'pending'
+          "
+        >
+          -
+        </span>
+        {{ transaction.amount }} {{ transaction.currency }}
+      </ng-container>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,5 @@
+export type TransactionStatus = 'positive' | 'negative' | 'pending';
+
 export interface Transaction {
   id: number;
   iban: string;
@@ -5,5 +7,6 @@ export interface Transaction {
   currency: string;
   category: string;
   description: string;
-  date:Date;
+  date: Date;
+  status: TransactionStatus;
 }

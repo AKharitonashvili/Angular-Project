@@ -4,6 +4,8 @@ import { find } from 'lodash';
 import { combineLatest, forkJoin, map, Observable, of, tap } from 'rxjs';
 import { Account, Balance } from 'src/app/dashboard/models';
 import {
+  LoadAccountBalances,
+  LoadAccounts,
   selectAccountsBalancesData,
   selectAccountsData,
 } from 'src/app/products/store';
@@ -19,6 +21,9 @@ export class TransactionsRestService {
   public transactions$: Observable<Transaction[]> = this.getTransactions();
 
   private getTransactions(): Observable<Transaction[]> {
+    this.store.dispatch(LoadAccounts());
+    this.store.dispatch(LoadAccountBalances());
+    
     return combineLatest(
       this.store.select(selectAccountsData),
       this.store.select(selectAccountsBalancesData)
