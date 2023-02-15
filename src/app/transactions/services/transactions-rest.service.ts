@@ -23,7 +23,7 @@ export class TransactionsRestService {
   private getTransactions(): Observable<Transaction[]> {
     this.store.dispatch(LoadAccounts());
     this.store.dispatch(LoadAccountBalances());
-    
+
     return combineLatest(
       this.store.select(selectAccountsData),
       this.store.select(selectAccountsBalancesData)
@@ -37,7 +37,19 @@ export class TransactionsRestService {
           ),
         }))
       ),
-      map((accounts: Account[]) => generateTransactions(accounts))
+      map((accounts: Account[]) => generateTransactions(accounts)),
+      map((transactions: Transaction[]) => {
+        transactions.sort((a: Transaction, b: Transaction) => {
+          return a.date > b.date ? -1 : 1;
+        });
+        return transactions;
+      })
     );
+  }
+
+  private sortByDate(a: Transaction, b: Transaction): number {
+    if (a.date < b.date) return -1;
+    if (a.date > b.date) return 1;
+    return 0;
   }
 }

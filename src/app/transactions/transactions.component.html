@@ -1,11 +1,14 @@
 <div
-  class="d-flex flex-column w-50"
+  class="d-flex flex-column w-50 p-2"
   *ngIf="transactions$ | async as transactions"
 >
   <div
-    class="d-flex justify-content-between p-2 px-5"
+    class="d-flex justify-content-between p-2 px-5 border-bottom"
     *ngFor="let transaction of transactions"
   >
+    <div>
+      {{ transaction.date | date }}
+    </div>
     <div>
       {{ transaction.description }}
     </div>
