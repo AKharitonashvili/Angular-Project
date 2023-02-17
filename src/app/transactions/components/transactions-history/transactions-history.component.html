@@ -1,0 +1,38 @@
+<div class="border m-2">
+  <app-transaction-history-header></app-transaction-history-header>
+
+  <div
+    class="d-flex justify-content-between py-3 px-5 border-bottom align-items-center"
+    *ngFor="let transaction of transactions"
+  >
+    <div>
+      {{ transaction.date | date }}
+    </div>
+    <div>
+      {{ transaction.description }}
+    </div>
+    <div
+      class="amount d-flex justify-content-end align-items-center"
+      [ngClass]="{
+        'text-danger': transaction.status == 'negative',
+        'text-success': transaction.status == 'positive'
+      }"
+    >
+      <app-progress
+        class="w-100"
+        *ngIf="!transaction.currency"
+        [loading]="true"
+      ></app-progress>
+      <ng-container *ngIf="transaction.currency">
+        <span
+          *ngIf="
+            transaction.status == 'negative' || transaction.status == 'pending'
+          "
+        >
+          -
+        </span>
+        {{ transaction.amount }} {{ transaction.currency }}
+      </ng-container>
+    </div>
+  </div>
+</div>

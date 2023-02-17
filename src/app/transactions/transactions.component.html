@@ -1,39 +1,6 @@
-<div
-  class="d-flex flex-column w-50 p-2"
-  *ngIf="transactions$ | async as transactions"
->
-  <div
-    class="d-flex justify-content-between p-2 px-5 border-bottom"
-    *ngFor="let transaction of transactions"
-  >
-    <div>
-      {{ transaction.date | date }}
-    </div>
-    <div>
-      {{ transaction.description }}
-    </div>
-    <div
-      class="amount d-flex justify-content-end"
-      [ngClass]="{
-        'text-danger': transaction.status == 'negative',
-        'text-success': transaction.status == 'positive'
-      }"
-    >
-      <app-progress
-        class="w-100"
-        *ngIf="!transaction.currency"
-        [loading]="true"
-      ></app-progress>
-      <ng-container *ngIf="transaction.currency">
-        <span
-          *ngIf="
-            transaction.status == 'negative' || transaction.status == 'pending'
-          "
-        >
-          -
-        </span>
-        {{ transaction.amount }} {{ transaction.currency }}
-      </ng-container>
-    </div>
-  </div>
+<div class="d-flex justify-content-center w-100">
+  <app-transactions-history
+    class="w-75"
+    [transactions]="transactions$ | async"
+  ></app-transactions-history>
 </div>
