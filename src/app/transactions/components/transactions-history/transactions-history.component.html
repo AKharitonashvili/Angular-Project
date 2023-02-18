@@ -14,8 +14,8 @@
     <div
       class="amount d-flex justify-content-end align-items-center"
       [ngClass]="{
-        'text-danger': transaction.status == 'negative',
-        'text-success': transaction.status == 'positive'
+        'text-danger': transaction.status === 'negative',
+        'text-success': transaction.status === 'positive'
       }"
     >
       <app-progress
@@ -26,7 +26,8 @@
       <ng-container *ngIf="transaction.currency">
         <span
           *ngIf="
-            transaction.status == 'negative' || transaction.status == 'pending'
+            transaction.status === 'negative' ||
+            transaction.status === 'pending'
           "
         >
           -

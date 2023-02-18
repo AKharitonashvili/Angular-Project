@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
 } from '@angular/core';
 import { Transaction } from '../../models';
 
@@ -12,10 +11,6 @@ import { Transaction } from '../../models';
   styleUrls: ['./transactions-history.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsHistoryComponent implements OnInit {
+export class TransactionsHistoryComponent {
   @Input() transactions: Transaction[];
-
-  constructor() {}
-
-  ngOnInit() {}
 }
