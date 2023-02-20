@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-transaction-history-header',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./transaction-history-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionHistoryHeaderComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class TransactionHistoryHeaderComponent {}
