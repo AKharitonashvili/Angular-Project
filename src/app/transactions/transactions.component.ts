@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
+import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import { Transaction } from './models';
 import { TransactionsRestService } from './services/transactions-rest.service';
 
@@ -10,12 +12,31 @@ import { TransactionsRestService } from './services/transactions-rest.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsComponent implements OnInit {
-  constructor(private rest: TransactionsRestService) {}
+  public searchForm: FormGroup;
 
   public transactions$: Observable<Transaction[]>;
 
+  constructor(private fb: FormBuilder, private rest: TransactionsRestService) {}
+
   ngOnInit() {
-    this.transactions$ = this.rest.transactions$.pipe(
+    this.searchForm = this.fb.group({
+      searchInput: new FormControl(null),
+    });
+
+    this.transactions$ = combineLatest(
+      this.rest.transactions$,
+      this.searchForm.get('searchInput').valueChanges.pipe(startWith(null))
+    ).pipe(
+      map(([transactions, searchInput]: [Transaction[], string]) => {
+        if (searchInput) {
+          return transactions?.filter((transaction: Transaction) =>
+            transaction.description
+              .toLowerCase()
+              .includes(searchInput.toLowerCase())
+          );
+        }
+        return transactions;
+      }),
       tap((v) => console.log(v))
     );
   }

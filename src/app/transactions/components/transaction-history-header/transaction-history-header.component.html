@@ -1,11 +1,12 @@
 <nav class="navbar navbar-dark bg-dark shadow-sm">
-  <div class="p-4 d-flex w-100 justify-content-between">
+  <form *ngIf="form" [formGroup]="form" class="p-4 d-flex w-100 justify-content-between">
     <a class="navbar-brand p-1" href="#"> Transaction History </a>
     <input
       class="form-control mr-sm-2 w-25"
       type="search"
       placeholder="Search"
       aria-label="Search"
+      formControlName="searchInput"
     />
-  </div>
+  </form>
 </nav>

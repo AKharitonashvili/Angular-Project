@@ -1,8 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Transaction } from '../../models';
 
 @Component({
@@ -12,5 +9,6 @@ import { Transaction } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsHistoryComponent {
-  @Input() transactions: Transaction[];
+  @Input() public transactions: Transaction[];
+  @Input() public form: FormGroup;
 }

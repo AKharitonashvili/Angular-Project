@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-transaction-history-header',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./transaction-history-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionHistoryHeaderComponent {}
+export class TransactionHistoryHeaderComponent {
+  @Input() public form: FormGroup;
+}
