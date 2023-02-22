@@ -28,16 +28,21 @@ export class TransactionsComponent implements OnInit {
       this.searchForm.get('searchInput').valueChanges.pipe(startWith(null))
     ).pipe(
       map(([transactions, searchInput]: [Transaction[], string]) => {
-        if (searchInput) {
-          return transactions?.filter((transaction: Transaction) =>
-            transaction.description
-              .toLowerCase()
-              .includes(searchInput.toLowerCase())
-          );
-        }
-        return transactions;
-      }),
-      tap((v) => console.log(v))
+        return searchInput
+          ? transactions?.filter(
+              (transaction: Transaction) =>
+                this.filterByInput(transaction.description, searchInput) ||
+                this.filterByInput(transaction.amount, searchInput)
+            )
+          : transactions;
+      })
     );
+  }
+
+  private filterByInput<T, G>(propery: T, filter: G): boolean {
+    return propery
+      .toString()
+      .toLocaleLowerCase()
+      .startsWith(filter.toString().toLocaleLowerCase());
   }
 }
