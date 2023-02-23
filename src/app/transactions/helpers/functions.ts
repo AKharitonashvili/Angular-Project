@@ -3,18 +3,19 @@ import { Account } from 'src/app/dashboard/models';
 import { Cattegories } from '../constants/constants.constants';
 import { Transaction, TransactionStatus } from '../models';
 
-var randomSentence = require('random-sentence');
+const randomSentence = require('random-sentence');
 
 export function generateTransaction(account: Account): Transaction {
+  const amount = randomInt(-10000, 10000);
   return {
     id: randomInt(),
     iban: account.iban,
     currency: account.currency,
-    amount: randomInt(0, 10000),
+    amount,
     category: generateCategory(),
     description: generateDescription(),
     date: randomDate(),
-    status: generateTransactionStatus(),
+    status: generateTransactionStatus(amount > 0),
   };
 }
 
@@ -36,7 +37,11 @@ export function generateCategory(): string {
   return Cattegories[randomInt(0, Cattegories.length - 1)];
 }
 
-export function generateTransactionStatus(): TransactionStatus {
-  const statuses: string[] = ['positive', 'negative', 'pending'];
+export function generateTransactionStatus(
+  isPositive: boolean
+): TransactionStatus {
+  const statuses: string[] = isPositive
+    ? ['positive']
+    : ['negative', 'pending'];
   return statuses[randomInt(0, statuses.length - 1)] as TransactionStatus;
 }

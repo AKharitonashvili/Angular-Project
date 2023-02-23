@@ -1,21 +1,24 @@
 <div class="border m-2">
-  <app-transaction-history-header [form]="form"></app-transaction-history-header>
+  <app-transaction-history-header
+    [form]="form"
+  ></app-transaction-history-header>
 
   <div
     class="d-flex justify-content-between py-3 px-5 border-bottom align-items-center"
     *ngFor="let transaction of transactions"
   >
-    <div>
+    <div class="w-25">
       {{ transaction.date | date }}
     </div>
-    <div>
+    <div class="w-50">
       {{ transaction.description }}
     </div>
     <div
-      class="amount d-flex justify-content-end align-items-center"
+      class="amount d-flex justify-content-end align-items-center w-25"
       [ngClass]="{
         'text-danger': transaction.status === 'negative',
-        'text-success': transaction.status === 'positive'
+        'text-success': transaction.status === 'positive',
+        'text-warning': transaction.status === 'pending'
       }"
     >
       <app-progress
@@ -24,14 +27,6 @@
         [loading]="true"
       ></app-progress>
       <ng-container *ngIf="transaction.currency">
-        <span
-          *ngIf="
-            transaction.status === 'negative' ||
-            transaction.status === 'pending'
-          "
-        >
-          -
-        </span>
         {{ transaction.amount }} {{ transaction.currency }}
       </ng-container>
     </div>
