@@ -8,6 +8,13 @@
     *ngFor="let transaction of transactions"
   >
     <div class="w-25">
+      <i
+        class="mx-2"
+        [ngClass]="{
+          'fa-solid fa-circle-check ': transaction.status !== 'pending',
+          'fas fa-ellipsis-h text-warning': transaction.status === 'pending'
+        }"
+      ></i>
       {{ transaction.date | date }}
     </div>
     <div class="w-50">
